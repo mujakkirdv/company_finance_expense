@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from io import BytesIO
 import os
-#import plotly.express as px
+import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime, date
 from dateutil.relativedelta import relativedelta
