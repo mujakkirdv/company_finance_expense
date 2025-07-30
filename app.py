@@ -14,6 +14,22 @@ from sklearn.linear_model import LinearRegression
 # Excel file path
 path = "expenses_earnings.xlsx"
 
+
+@st.cache_data
+def load_data():
+    try:
+        # Try loading from GitHub if file doesn't exist
+        if not os.path.exists("expenses_earnings.xlsx"):
+            url = "https://github.com/mujakkirdv/company_finance_expense/raw/main/expenses_earnings.xlsx"
+            df = pd.read_excel(url)
+            df.to_excel("expenses_earnings.xlsx", index=False)
+        return pd.read_excel("expenses_earnings.xlsx", engine='openpyxl')
+    except Exception as e:
+        st.error(f"Error loading data: {str(e)}")
+        return pd.DataFrame(columns=["date", "description", "amount", "category"])
+
+
+
 # Page configuration
 st.set_page_config(
     page_title="Advanced Financial Analytics Dashboard",
